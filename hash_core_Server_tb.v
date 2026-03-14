@@ -37,6 +37,9 @@ wire ofifo0_empty, ofifo1_empty;
 wire [5:0] squeeze_ctr;
 wire [7:0] fifo_GENA_ctr;
 
+reg [255:0] d;
+integer i;
+
 // Clock generation: 100MHz (10ns period)
 always #5 clk = ~clk;
 
@@ -113,19 +116,26 @@ initial begin
 	end	
 	//when feeding data, ififo_empty automatically becomes 0 and trigger keccak core to start absorbing data
 
-	ififo_wen = 1b'0;//disable input
-	ififo_last = 1b'0;//reset last bit
+	ififo_wen = 1'b0;//disable input
+	ififo_last = 1'b0;//reset last bit
 	// Phase 4: Wait for keccak_ready
 	// TODO
 	@(posedge clk);
 	wait(keccak_ready ==  1'b1);
-	@posedge clk;
+	@(posedge clk);
 	// Phase 5: Enable output and read
 	// TODO
-	keccak_ctr = 3h'1;
+	keccak_ctr = 3'h1; //squeeze
 	ofifo_ena = 1'b1;
-	@posedge clk;
+	@(posedge clk);
 	
+	while (!ofifo0_empty) begin
+		ofifo0_req = 1'b1; //raising req for one clock is equivalent to read one word
+		@(posedge clk);
+		ofifo0_req = 1'b0;
+		@(posedge clk);
+	end //read all output words
+
 	$finish;
 end
 
