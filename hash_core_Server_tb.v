@@ -38,7 +38,7 @@ wire [5:0] squeeze_ctr;
 wire [7:0] fifo_GENA_ctr;
 
 reg [255:0] d;
-integer i;
+integer i, read_count;
 
 // Clock generation: 100MHz (10ns period)
 always #5 clk = ~clk;
@@ -128,13 +128,24 @@ initial begin
 	keccak_ctr = 3'h1; //squeeze
 	ofifo_ena = 1'b1;
 	@(posedge clk);
-	
+
+	repeat(32) @(posedge clk);
+
+	read_count = 0;
 	while (!ofifo0_empty) begin
-		ofifo0_req = 1'b1; //raising req for one clock is equivalent to read one word
+		ofifo0_req = 1'b1;
 		@(posedge clk);
 		ofifo0_req = 1'b0;
+		$display("ofifo0_dout = %h", ofifo0_dout);
 		@(posedge clk);
-	end //read all output words
+		//exit after 64 reads so sim cannot hang
+		if (read_count >= 63) begin
+			$display("Stopping after 64 reads (safety limit)");
+			break;
+		end
+		read_count = read_count + 1;
+	end
+	$display("Phase 5 done. ofifo0_empty = %b", ofifo0_empty);
 	$finish;
 end
 
