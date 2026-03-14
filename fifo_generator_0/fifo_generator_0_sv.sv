@@ -1,10 +1,10 @@
-// (c) Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
-// (c) Copyright 2022-2026 Advanced Micro Devices, Inc. All rights reserved.
-// 
+// Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+// Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+// -------------------------------------------------------------------------------
 // This file contains confidential and proprietary information
 // of AMD and is protected under U.S. and international copyright
 // and other intellectual property laws.
-// 
+//
 // DISCLAIMER
 // This disclaimer is not a license and does not grant any
 // rights to the materials distributed herewith. Except as
@@ -26,7 +26,7 @@
 // by a third party) even if such damage or loss was
 // reasonably foreseeable or AMD had been advised of the
 // possibility of the same.
-// 
+//
 // CRITICAL APPLICATIONS
 // AMD products are not designed or intended to be fail-
 // safe, or for use in any application requiring fail-safe
@@ -40,33 +40,46 @@
 // liability of any use of AMD products in Critical
 // Applications, subject only to applicable laws and
 // regulations governing limitations on product liability.
-// 
+//
 // THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 // PART OF THIS FILE AT ALL TIMES.
-// 
+//
 // DO NOT MODIFY THIS FILE.
 
-// IP VLNV: xilinx.com:ip:fifo_generator:13.2
-// IP Revision: 14
+// MODULE VLNV: xilinx.com:ip:fifo_generator:13.2
 
-// The following must be inserted into your Verilog file for this
-// core to be instantiated. Change the instance name and port connections
-// (in parentheses) to your own signal names.
+`timescale 1ps / 1ps
 
-//----------- Begin Cut here for INSTANTIATION Template ---// INST_TAG
-fifo_generator_1 your_instance_name (
-  .clk(clk),      // input wire clk
-  .srst(srst),    // input wire srst
-  .din(din),      // input wire [23 : 0] din
-  .wr_en(wr_en),  // input wire wr_en
-  .rd_en(rd_en),  // input wire rd_en
-  .dout(dout),    // output wire [23 : 0] dout
-  .full(full),    // output wire full
-  .empty(empty)  // output wire empty
+`include "vivado_interfaces.svh"
+
+module fifo_generator_0_sv (
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire clk,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire srst,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [35:0] din,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire wr_en,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire rd_en,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [35:0] dout,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire full,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire empty
 );
-// INST_TAG_END ------ End INSTANTIATION Template ---------
 
-// You must compile the wrapper file fifo_generator_1.v when simulating
-// the core, fifo_generator_1. When compiling the wrapper file, be sure to
-// reference the Verilog simulation library.
+  fifo_generator_0 inst (
+    .clk(clk),
+    .srst(srst),
+    .din(din),
+    .wr_en(wr_en),
+    .rd_en(rd_en),
+    .dout(dout),
+    .full(full),
+    .empty(empty)
+  );
 
+endmodule

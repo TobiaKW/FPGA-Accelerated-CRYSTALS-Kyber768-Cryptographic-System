@@ -1,21 +1,21 @@
--- (c) Copyright 1995-2021 Xilinx, Inc. All rights reserved.
+-- (c) Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+-- (c) Copyright 2022-2026 Advanced Micro Devices, Inc. All rights reserved.
 -- 
 -- This file contains confidential and proprietary information
--- of Xilinx, Inc. and is protected under U.S. and
--- international copyright and other intellectual property
--- laws.
+-- of AMD and is protected under U.S. and international copyright
+-- and other intellectual property laws.
 -- 
 -- DISCLAIMER
 -- This disclaimer is not a license and does not grant any
 -- rights to the materials distributed herewith. Except as
 -- otherwise provided in a valid license issued to you by
--- Xilinx, and to the maximum extent permitted by applicable
+-- AMD, and to the maximum extent permitted by applicable
 -- law: (1) THESE MATERIALS ARE MADE AVAILABLE "AS IS" AND
--- WITH ALL FAULTS, AND XILINX HEREBY DISCLAIMS ALL WARRANTIES
+-- WITH ALL FAULTS, AND AMD HEREBY DISCLAIMS ALL WARRANTIES
 -- AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING
 -- BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, NON-
 -- INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR PURPOSE; and
--- (2) Xilinx shall not be liable (whether in contract or tort,
+-- (2) AMD shall not be liable (whether in contract or tort,
 -- including negligence, or under any other theory of
 -- liability) for any loss or damage of any kind or nature
 -- related to, arising under or in connection with these
@@ -24,11 +24,11 @@
 -- (including loss of data, profits, goodwill, or any type of
 -- loss or damage suffered as a result of any action brought
 -- by a third party) even if such damage or loss was
--- reasonably foreseeable or Xilinx had been advised of the
+-- reasonably foreseeable or AMD had been advised of the
 -- possibility of the same.
 -- 
 -- CRITICAL APPLICATIONS
--- Xilinx products are not designed or intended to be fail-
+-- AMD products are not designed or intended to be fail-
 -- safe, or for use in any application requiring fail-safe
 -- performance, such as life-support or safety devices or
 -- systems, Class III medical devices, nuclear facilities,
@@ -37,7 +37,7 @@
 -- injury, or severe property or environmental damage
 -- (individually and collectively, "Critical
 -- Applications"). Customer assumes the sole risk and
--- liability of any use of Xilinx products in Critical
+-- liability of any use of AMD products in Critical
 -- Applications, subject only to applicable laws and
 -- regulations governing limitations on product liability.
 -- 
@@ -47,14 +47,14 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: xilinx.com:ip:fifo_generator:13.2
--- IP Revision: 0
+-- IP Revision: 14
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY fifo_generator_v13_2_0;
-USE fifo_generator_v13_2_0.fifo_generator_v13_2_0;
+LIBRARY fifo_generator_v13_2_14;
+USE fifo_generator_v13_2_14.fifo_generator_v13_2_14;
 
 ENTITY fifo_generator_7 IS
   PORT (
@@ -72,7 +72,7 @@ END fifo_generator_7;
 ARCHITECTURE fifo_generator_7_arch OF fifo_generator_7 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF fifo_generator_7_arch: ARCHITECTURE IS "yes";
-  COMPONENT fifo_generator_v13_2_0 IS
+  COMPONENT fifo_generator_v13_2_14 IS
     GENERIC (
       C_COMMON_CLOCK : INTEGER;
       C_SELECT_XPM : INTEGER;
@@ -510,13 +510,13 @@ ARCHITECTURE fifo_generator_7_arch OF fifo_generator_7 IS
       axis_prog_full : OUT STD_LOGIC;
       axis_prog_empty : OUT STD_LOGIC
     );
-  END COMPONENT fifo_generator_v13_2_0;
+  END COMPONENT fifo_generator_v13_2_14;
   ATTRIBUTE X_CORE_INFO : STRING;
-  ATTRIBUTE X_CORE_INFO OF fifo_generator_7_arch: ARCHITECTURE IS "fifo_generator_v13_2_0,Vivado 2017.3";
+  ATTRIBUTE X_CORE_INFO OF fifo_generator_7_arch: ARCHITECTURE IS "fifo_generator_v13_2_14,Vivado 2025.2";
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
-  ATTRIBUTE CHECK_LICENSE_TYPE OF fifo_generator_7_arch : ARCHITECTURE IS "fifo_generator_7,fifo_generator_v13_2_0,{}";
+  ATTRIBUTE CHECK_LICENSE_TYPE OF fifo_generator_7_arch : ARCHITECTURE IS "fifo_generator_7,fifo_generator_v13_2_14,{}";
   ATTRIBUTE CORE_GENERATION_INFO : STRING;
-  ATTRIBUTE CORE_GENERATION_INFO OF fifo_generator_7_arch: ARCHITECTURE IS "fifo_generator_7,fifo_generator_v13_2_0,{x_ipProduct=Vivado 2017.3,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=fifo_generator,x_ipVersion=13.2,x_ipCoreRevision=0,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_COMMON_CLOCK=1,C_SELECT_XPM=0,C_COUNT_TYPE=0,C_DATA_COUNT_WIDTH=6,C_DEFAULT_VALUE=BlankString,C_DIN_WIDTH=25,C_DOUT_RST_VAL=0,C_DOUT_WIDTH=25,C_ENABLE_RLOCS=0,C_FAMILY=artix7,C_FULL_FLAGS_RST_VAL=0,C_HAS_ALMOST_EMPTY=0,C_HAS_ALMOST_FULL=0,C_HAS_BACKUP=0,C_HAS_DATA_COUNT=0,C_HAS_INT_CLK=0,C_" & 
+  ATTRIBUTE CORE_GENERATION_INFO OF fifo_generator_7_arch: ARCHITECTURE IS "fifo_generator_7,fifo_generator_v13_2_14,{x_ipProduct=Vivado 2025.2,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=fifo_generator,x_ipVersion=13.2,x_ipCoreRevision=14,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_COMMON_CLOCK=1,C_SELECT_XPM=0,C_COUNT_TYPE=0,C_DATA_COUNT_WIDTH=6,C_DEFAULT_VALUE=BlankString,C_DIN_WIDTH=25,C_DOUT_RST_VAL=0,C_DOUT_WIDTH=25,C_ENABLE_RLOCS=0,C_FAMILY=zynq,C_FULL_FLAGS_RST_VAL=0,C_HAS_ALMOST_EMPTY=0,C_HAS_ALMOST_FULL=0,C_HAS_BACKUP=0,C_HAS_DATA_COUNT=0,C_HAS_INT_CLK=0,C_" & 
 "HAS_MEMINIT_FILE=0,C_HAS_OVERFLOW=0,C_HAS_RD_DATA_COUNT=0,C_HAS_RD_RST=0,C_HAS_RST=0,C_HAS_SRST=1,C_HAS_UNDERFLOW=0,C_HAS_VALID=0,C_HAS_WR_ACK=0,C_HAS_WR_DATA_COUNT=0,C_HAS_WR_RST=0,C_IMPLEMENTATION_TYPE=0,C_INIT_WR_PNTR_VAL=0,C_MEMORY_TYPE=2,C_MIF_FILE_NAME=BlankString,C_OPTIMIZATION_MODE=0,C_OVERFLOW_LOW=0,C_PRELOAD_LATENCY=1,C_PRELOAD_REGS=0,C_PRIM_FIFO_TYPE=512x36,C_PROG_EMPTY_THRESH_ASSERT_VAL=2,C_PROG_EMPTY_THRESH_NEGATE_VAL=3,C_PROG_EMPTY_TYPE=0,C_PROG_FULL_THRESH_ASSERT_VAL=62,C_PROG_FUL" & 
 "L_THRESH_NEGATE_VAL=61,C_PROG_FULL_TYPE=0,C_RD_DATA_COUNT_WIDTH=6,C_RD_DEPTH=64,C_RD_FREQ=1,C_RD_PNTR_WIDTH=6,C_UNDERFLOW_LOW=0,C_USE_DOUT_RST=1,C_USE_ECC=0,C_USE_EMBEDDED_REG=0,C_USE_PIPELINE_REG=0,C_POWER_SAVING_MODE=0,C_USE_FIFO16_FLAGS=0,C_USE_FWFT_DATA_COUNT=0,C_VALID_LOW=0,C_WR_ACK_LOW=0,C_WR_DATA_COUNT_WIDTH=6,C_WR_DEPTH=64,C_WR_FREQ=1,C_WR_PNTR_WIDTH=6,C_WR_RESPONSE_LATENCY=1,C_MSGON_VAL=1,C_ENABLE_RST_SYNC=1,C_EN_SAFETY_CKT=0,C_ERROR_INJECTION_TYPE=0,C_SYNCHRONIZER_STAGE=2,C_INTERFACE_T" & 
 "YPE=0,C_AXI_TYPE=1,C_HAS_AXI_WR_CHANNEL=1,C_HAS_AXI_RD_CHANNEL=1,C_HAS_SLAVE_CE=0,C_HAS_MASTER_CE=0,C_ADD_NGC_CONSTRAINT=0,C_USE_COMMON_OVERFLOW=0,C_USE_COMMON_UNDERFLOW=0,C_USE_DEFAULT_SETTINGS=0,C_AXI_ID_WIDTH=1,C_AXI_ADDR_WIDTH=32,C_AXI_DATA_WIDTH=64,C_AXI_LEN_WIDTH=8,C_AXI_LOCK_WIDTH=1,C_HAS_AXI_ID=0,C_HAS_AXI_AWUSER=0,C_HAS_AXI_WUSER=0,C_HAS_AXI_BUSER=0,C_HAS_AXI_ARUSER=0,C_HAS_AXI_RUSER=0,C_AXI_ARUSER_WIDTH=1,C_AXI_AWUSER_WIDTH=1,C_AXI_WUSER_WIDTH=1,C_AXI_BUSER_WIDTH=1,C_AXI_RUSER_WIDTH=1," & 
@@ -527,17 +527,21 @@ ARCHITECTURE fifo_generator_7_arch OF fifo_generator_7 IS
 "PROG_FULL_THRESH_ASSERT_VAL_WDCH=1023,C_PROG_FULL_THRESH_ASSERT_VAL_WRCH=1023,C_PROG_FULL_THRESH_ASSERT_VAL_RACH=1023,C_PROG_FULL_THRESH_ASSERT_VAL_RDCH=1023,C_PROG_FULL_THRESH_ASSERT_VAL_AXIS=1023,C_PROG_EMPTY_TYPE_WACH=0,C_PROG_EMPTY_TYPE_WDCH=0,C_PROG_EMPTY_TYPE_WRCH=0,C_PROG_EMPTY_TYPE_RACH=0,C_PROG_EMPTY_TYPE_RDCH=0,C_PROG_EMPTY_TYPE_AXIS=0,C_PROG_EMPTY_THRESH_ASSERT_VAL_WACH=1022,C_PROG_EMPTY_THRESH_ASSERT_VAL_WDCH=1022,C_PROG_EMPTY_THRESH_ASSERT_VAL_WRCH=1022,C_PROG_EMPTY_THRESH_ASSERT_VA" & 
 "L_RACH=1022,C_PROG_EMPTY_THRESH_ASSERT_VAL_RDCH=1022,C_PROG_EMPTY_THRESH_ASSERT_VAL_AXIS=1022,C_REG_SLICE_MODE_WACH=0,C_REG_SLICE_MODE_WDCH=0,C_REG_SLICE_MODE_WRCH=0,C_REG_SLICE_MODE_RACH=0,C_REG_SLICE_MODE_RDCH=0,C_REG_SLICE_MODE_AXIS=0}";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
+  ATTRIBUTE X_INTERFACE_MODE : STRING;
   ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
+  ATTRIBUTE X_INTERFACE_INFO OF clk: SIGNAL IS "xilinx.com:signal:clock:1.0 core_clk CLK";
+  ATTRIBUTE X_INTERFACE_MODE OF clk: SIGNAL IS "slave core_clk";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME core_clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF din: SIGNAL IS "xilinx.com:interface:fifo_write:1.0 FIFO_WRITE WR_DATA";
+  ATTRIBUTE X_INTERFACE_MODE OF din: SIGNAL IS "slave FIFO_WRITE";
+  ATTRIBUTE X_INTERFACE_INFO OF dout: SIGNAL IS "xilinx.com:interface:fifo_read:1.0 FIFO_READ RD_DATA";
   ATTRIBUTE X_INTERFACE_INFO OF empty: SIGNAL IS "xilinx.com:interface:fifo_read:1.0 FIFO_READ EMPTY";
   ATTRIBUTE X_INTERFACE_INFO OF full: SIGNAL IS "xilinx.com:interface:fifo_write:1.0 FIFO_WRITE FULL";
-  ATTRIBUTE X_INTERFACE_INFO OF dout: SIGNAL IS "xilinx.com:interface:fifo_read:1.0 FIFO_READ RD_DATA";
   ATTRIBUTE X_INTERFACE_INFO OF rd_en: SIGNAL IS "xilinx.com:interface:fifo_read:1.0 FIFO_READ RD_EN";
+  ATTRIBUTE X_INTERFACE_MODE OF rd_en: SIGNAL IS "slave FIFO_READ";
   ATTRIBUTE X_INTERFACE_INFO OF wr_en: SIGNAL IS "xilinx.com:interface:fifo_write:1.0 FIFO_WRITE WR_EN";
-  ATTRIBUTE X_INTERFACE_INFO OF din: SIGNAL IS "xilinx.com:interface:fifo_write:1.0 FIFO_WRITE WR_DATA";
-  ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME core_clk, FREQ_HZ 100000000, PHASE 0.000";
-  ATTRIBUTE X_INTERFACE_INFO OF clk: SIGNAL IS "xilinx.com:signal:clock:1.0 core_clk CLK";
 BEGIN
-  U0 : fifo_generator_v13_2_0
+  U0 : fifo_generator_v13_2_14
     GENERIC MAP (
       C_COMMON_CLOCK => 1,
       C_SELECT_XPM => 0,
@@ -548,7 +552,7 @@ BEGIN
       C_DOUT_RST_VAL => "0",
       C_DOUT_WIDTH => 25,
       C_ENABLE_RLOCS => 0,
-      C_FAMILY => "artix7",
+      C_FAMILY => "zynq",
       C_FULL_FLAGS_RST_VAL => 0,
       C_HAS_ALMOST_EMPTY => 0,
       C_HAS_ALMOST_FULL => 0,
