@@ -131,20 +131,15 @@ initial begin
 
 	repeat(32) @(posedge clk);
 
-	read_count = 0;
-	while (!ofifo0_empty) begin
+	for (read_count = 0; read_count < 64 && !ofifo0_empty; read_count = read_count + 1) begin
 		ofifo0_req = 1'b1;
 		@(posedge clk);
 		ofifo0_req = 1'b0;
 		$display("ofifo0_dout = %h", ofifo0_dout);
 		@(posedge clk);
-		//exit after 64 reads so sim cannot hang
-		if (read_count >= 63) begin
-			$display("Stopping after 64 reads (safety limit)");
-			break;
-		end
-		read_count = read_count + 1;
 	end
+	if (read_count >= 64)
+		$display("Stopping after 64 reads (safety limit)");
 	$display("Phase 5 done. ofifo0_empty = %b", ofifo0_empty);
 	$finish;
 end
