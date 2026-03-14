@@ -93,7 +93,6 @@ initial begin
 
 	// Phase 1: Reset & clk
 	// TODO
-	always #5 clk = ~clk;
 
 	#10 rst = 1; //trigger initialization of all registers
 	#20 rst = 0;
@@ -111,17 +110,22 @@ initial begin
     	ififo_last   = (i == 7);       //bit32, high when last word in the blk
 		ififo_din    = d[32*i +: 32];  //bit 31:0
     	#10;                           // wait one cycle
-	end
+	end	
+	//when feeding data, ififo_empty automatically becomes 0 and trigger keccak core to start absorbing data
 
 	ififo_wen = 1b'0;//disable input
 	ififo_last = 1b'0;//reset last bit
 	// Phase 4: Wait for keccak_ready
 	// TODO
-	
-
+	@(posedge clk);
+	wait(keccak_ready ==  1'b1);
+	@posedge clk;
 	// Phase 5: Enable output and read
 	// TODO
-
+	keccak_ctr = 3h'1;
+	ofifo_ena = 1'b1;
+	@posedge clk;
+	
 	$finish;
 end
 
