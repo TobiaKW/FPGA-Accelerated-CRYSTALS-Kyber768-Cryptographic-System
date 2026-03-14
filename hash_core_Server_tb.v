@@ -135,7 +135,6 @@ initial begin
 		ofifo0_req = 1'b0;
 		@(posedge clk);
 	end //read all output words
-
 	$finish;
 end
 
