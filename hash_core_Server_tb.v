@@ -133,10 +133,9 @@ initial begin
 
 	// Phase 5: Raw hash is on keccak_dout
 	$display("keccak_ready seen. keccak_dout = %h", keccak_dout);
-	@(posedge clk);
+	// Add extra cycles to observe fifo8 -> decode_keccak -> ofifo0 pipeline
+	repeat(128) @(posedge clk);
 	$display("Phase 5 done.");
-
-
 	$finish;
 end
 
