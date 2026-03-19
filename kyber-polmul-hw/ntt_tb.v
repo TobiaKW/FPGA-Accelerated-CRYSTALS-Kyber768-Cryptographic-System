@@ -59,7 +59,6 @@ initial begin
     load_b_i   = 1'b0;
     read_a     = 1'b0;
     read_b     = 1'b0;
-    start_ab   = 1'b0;
     start_fntt = 1'b0;
     start_pwm2 = 1'b0;
     start_intt = 1'b0;
@@ -102,22 +101,34 @@ initial begin
     end
 
     // start fntt: to make the two polynomials in NTT domain, they have better big-O
+    // perform fntt on a
     @(posedge clk);
-    start_fntt = 1'b1; //start_ab == 0 at the moment: perform fntt on b
-    wait (done == 1'b1);
+    start_fntt = 1'b1; 
+    start_ab = 1'b1;
     @(posedge clk);
     start_fntt = 1'b0;
-    @(posedge clk);
-    start_ab = 1'b1; //start_ab == 1 at the moment: perform fntt on a
-    @(posedge clk);
-    start_fntt = 1'b1; //start_ab == 1 at the moment: perform fntt on a
+    start_ab = 1'b0;
     wait (done == 1'b1);
+    @(posedge clk);
+
+    // perform fntt on b
+    @(posedge clk);
+    start_fntt = 1'b1;
+    start_ab = 1'b0; 
+    @(posedge clk);
     start_fntt = 1'b0;
+    wait (done == 1'b1);
+    @(posedge clk);
 
     // start pwm2: to make the two polynomials in NTT domain, they have better big-O
     @(posedge clk);
     start_pwm2 = 1'b1;
     @(posedge clk);
     start_pwm2 = 1'b0;
+    wait (done == 1'b1);
+    @(posedge clk);
+
+    $display("NTT TB finished.");
+    $finish;
 end
 endmodule
