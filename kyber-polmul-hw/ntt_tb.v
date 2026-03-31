@@ -125,7 +125,7 @@ initial begin
     read_a = 1'b1;
     @(posedge clk);
     read_a = 1'b0;
-    repeat (3) @(posedge clk);
+    repeat (4) @(posedge clk);
 
     for (k = 0; k < 256; k = k + 1) begin
         $display("dout=%0d", dout);
