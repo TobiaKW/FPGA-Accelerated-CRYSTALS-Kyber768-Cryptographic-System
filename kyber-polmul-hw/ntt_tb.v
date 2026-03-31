@@ -17,10 +17,16 @@ wire                    done;
 // Internal polynomial storage for TB
 reg  [11:0] poly_in  [0:255]; 
 reg  [11:0] poly_out [0:255];
-integer i;
+integer k; // Use k to avoid conflict with task internal i
 
-// Clock generation: 100 MHz (10 ns period)
-always #5 clk = ~clk;
+// Simple task to init an input polynomial
+task init_poly_all_ones;
+    integer i;
+    begin
+        for (i = 0; i < 256; i = i + 1)
+            poly_in[i] = 12'd1; // test: all 1
+    end
+endtask
 
 // DUT instantiation
 KyberHPM1PE_top #(.PE_NUMBER(PE_NUMBER)) DUT (
@@ -41,15 +47,6 @@ KyberHPM1PE_top #(.PE_NUMBER(PE_NUMBER)) DUT (
     .done       (done)
 );
 
-// Simple task to init an input polynomial
-task init_poly_single_one;
-    integer i;
-    begin
-        for (i = 0; i < 256; i = i + 1)
-            poly_in[i] = 12'd1; //test: all 1
-    end
-endtask
-
 initial begin
     // Initialize signals
     clk        = 1'b0;
@@ -60,6 +57,7 @@ initial begin
     load_b_i   = 1'b0;
     read_a     = 1'b0;
     read_b     = 1'b0;
+    start_ab   = 1'b0;
     start_fntt = 1'b0;
     start_pwm2 = 1'b0;
     start_intt = 1'b0;
@@ -73,36 +71,30 @@ initial begin
     #20;
 
     // Initialize test polynomial
-    init_poly_single_one();
+    init_poly_all_ones();
     @(posedge clk);
 
-    // TODO: Add loading logic here (pulse load_a_f, then loop 256 cycles)
-    // give a 1 cycle pulse kick off the reading process
+    // --- Load Polynomial A ---
     load_a_f = 1'b1;
     @(posedge clk);
     load_a_f = 1'b0;
-    @(posedge clk);
-
-    integer i;
-    for (i = 0; i < 256; i = i + 1) begin
-        din = poly_in[i];
+    for (k = 0; k < 256; k = k + 1) begin
+        din = poly_in[k];
         @(posedge clk);
     end
+    din = 0;
 
-    init_poly_single_one(); //supposed we need to give a different polynomial
-
+    // --- Load Polynomial B ---
     load_b_f = 1'b1;
     @(posedge clk);
     load_b_f = 1'b0;
-    @(posedge clk);
-
-    for (i = 0; i < 256; i = i + 1) begin
-        din = poly_in[i];
+    for (k = 0; k < 256; k = k + 1) begin
+        din = poly_in[k];
         @(posedge clk);
     end
+    din = 0;
 
-    // start fntt: to make the two polynomials in NTT domain, they have better big-O
-    // perform fntt on a
+    // --- Perform FNTT on A ---
     @(posedge clk);
     start_fntt = 1'b1; 
     start_ab = 1'b1;
@@ -112,7 +104,7 @@ initial begin
     wait (done == 1'b1);
     @(posedge clk);
 
-    // perform fntt on b
+    // --- Perform FNTT on B ---
     @(posedge clk);
     start_fntt = 1'b1;
     start_ab = 1'b0; 
@@ -121,7 +113,7 @@ initial begin
     wait (done == 1'b1);
     @(posedge clk);
 
-    // start pwm2: to make the two polynomials in NTT domain, they have better big-O
+    // --- Perform PWM2 (A * B) ---
     @(posedge clk);
     start_pwm2 = 1'b1;
     @(posedge clk);
@@ -132,4 +124,5 @@ initial begin
     $display("NTT TB finished.");
     $finish;
 end
+
 endmodule

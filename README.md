@@ -1,4 +1,4 @@
-### FPGA Accelerated CRYSTALS Kyber768 Crytographic System
+### FPGA Accelerated CRYSTALS Kyber768 Cryptographic System
 
 Course Project for CENG3430 @CUHK, Spring 2026.
 
