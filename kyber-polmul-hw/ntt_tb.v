@@ -14,6 +14,9 @@ reg  [12*PE_NUMBER-1:0] din;
 wire [12*PE_NUMBER-1:0] dout;
 wire                    done;
 
+// 100 MHz testbench clock (10 ns period)
+always #5 clk = ~clk;
+
 // Internal polynomial storage for TB
 reg  [11:0] poly_in  [0:255]; 
 reg  [11:0] poly_out [0:255];
@@ -50,7 +53,7 @@ KyberHPM1PE_top #(.PE_NUMBER(1)) DUT (
 initial begin
     // Initialize signals
     clk        = 1'b0;
-    reset      = 1'b0;
+    reset      = 1'b1;
     load_a_f   = 1'b0;
     load_a_i   = 1'b0;
     load_b_f   = 1'b0;
@@ -64,12 +67,9 @@ initial begin
     din        = 0;
 
     // Reset sequence
-    @(posedge clk);
-//    reset = 1'b1;
-//    wait(10);
-//    @(posedge clk);
-//    reset = 1'b0;
-    @(posedge clk);
+    #20;
+    reset = 1'b0;
+    #20;
 
     // Initialize test polynomial
     init_poly_all_ones();
